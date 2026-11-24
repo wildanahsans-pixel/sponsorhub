@@ -1,0 +1,8 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script src="https://cdn.tailwindcss.com"></script><title>Login · SponsorHub</title></head>
+<body class="min-h-screen bg-slate-950 flex items-center justify-center p-5"><form method="POST" action="{{ route('login.post') }}" class="bg-white rounded-3xl p-8 w-full max-w-md shadow-2xl">@csrf
+<a href="{{ route('home') }}" class="text-3xl font-black">Sponsor<span class="text-indigo-600">Hub</span></a><p class="text-slate-500 mt-2 mb-7">Masuk untuk mengelola sponsorship.</p>
+@if($errors->any())<p class="text-rose-600 text-sm mb-3">{{ $errors->first() }}</p>@endif
+<label class="text-sm font-medium">Email</label><input name="email" type="email" value="{{ old('email') }}" required autocomplete="username" class="w-full border rounded-xl p-3 mt-1 mb-4">
+<label class="text-sm font-medium">Password</label><input name="password" type="password" required autocomplete="current-password" class="w-full border rounded-xl p-3 mt-1 mb-4">
+<label class="flex items-center gap-2 text-sm text-slate-600 mb-5"><input type="checkbox" name="remember" value="1"> Ingat saya</label><button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl p-3 font-semibold">Masuk</button>
+<p class="text-center text-sm text-slate-500 mt-5">Belum punya akun perusahaan? <a href="{{ route('register') }}" class="text-indigo-600 font-semibold">Daftar</a></p><p class="text-xs text-slate-400 mt-5">Akun demo: panitia / perusahaan / koordinator / bendahara @sponsorhub.test · password: password</p></form></body></html>
