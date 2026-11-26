@@ -27,6 +27,18 @@ class DatabaseSeeder extends Seeder
             'nama_sponsor'=>'PT Kopi Nusantara','kontak_person'=>'Budi Santoso','nomor_telepon'=>'081234567890',
             'kategori'=>'F&B','status_kerja_sama'=>'Aktif'
         ]);
+        // Hubungkan akun perusahaan demo dengan sponsor yang memiliki data benefit.
+$company = User::where('email', 'perusahaan@sponsorhub.test')->first();
+
+if ($company) {
+    // Lepaskan relasi dari sponsor demo lain jika sebelumnya sudah terhubung.
+    Sponsor::where('user_id', $company->id)
+        ->where('id', '!=', $s->id)
+        ->update(['user_id' => null]);
+
+    // Hubungkan akun perusahaan dengan PT Kopi Nusantara.
+    $s->update(['user_id' => $company->id]);
+}
         if (!$s->benefits()->exists()) {
             Benefit::create(['sponsor_id'=>$s->id,'nama_benefit'=>'Logo pada banner acara','nilai'=>1000000,'tanggal_target'=>now()->addDays(10),'status_benefit'=>'Selesai','tanggal_realisasi'=>now()->toDateString()]);
             Benefit::create(['sponsor_id'=>$s->id,'nama_benefit'=>'Booth promosi','nilai'=>1500000,'tanggal_target'=>now()->addDays(15),'status_benefit'=>'Belum Selesai']);
